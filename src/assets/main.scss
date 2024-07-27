@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'pixel';
+  src: url('@/assets/fonts/pixel.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 @layer base {
   *,
   *::before,
@@ -10,7 +16,8 @@
   }
 
   body {
-    @apply min-h-screen  text-gray-800 bg-white transition-colors duration-500 leading-6 font-sans text-base antialiased;
+    font-family: 'pixel', sans-serif;
+    @apply min-h-screen  text-gray-800 bg-white transition-colors duration-500 leading-6 text-base antialiased;
     @apply xl:flex xl:place-items-center;
     @apply dark:text-gray-400 dark:bg-gray-900;
     text-rendering: optimizeLegibility;
