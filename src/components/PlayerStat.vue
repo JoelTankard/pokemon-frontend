@@ -1,7 +1,7 @@
 <template>
     <div v-if="player" class="flex items-start gap-4">
         <Player :index="player.index" />
-        <h2 class="mt-2 whitespace-nowrap w-96">{{ player.name }}</h2>
+        <h2 class="mt-2 whitespace-nowrap">{{ player.name }}</h2>
     </div>
 </template>
 

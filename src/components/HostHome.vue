@@ -17,7 +17,7 @@
             <div class="players-wrapper">
                 <div class="w-1/3 mb-12 flex items-center flex-col" v-for="i in maxPlayers" :key="i">
                   <Player :index="i" :type="getPlayer(i - 1) ? 'default' : 'empty' " />
-                  <p :class="`mt-4  whitespace-nowrap w-96`">{{ getPlayer(i - 1)?.name || '' }} </p>
+                  <p :class="`mt-4  whitespace-nowrap`">{{ getPlayer(i - 1)?.name || '' }} </p>
   
                 </div>
             </div>
