@@ -8,6 +8,17 @@
   font-weight: normal;
   font-style: normal;
 }
+
+img {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: pixelated
+}
+
+
 @layer base {
   *,
   *::before,
@@ -15,17 +26,16 @@
     @apply box-border m-0 relative font-normal;
   }
 
+  
   body {
     font-family: 'pixel', sans-serif;
-    @apply min-h-screen  text-gray-800 bg-white transition-colors duration-500 leading-6 text-base antialiased;
-    @apply xl:flex xl:place-items-center;
+    @apply min-h-screen  text-gray-800 bg-white transition-colors duration-500 leading-6 text-base antialiased max-w-screen-2xl mx-auto;
     @apply dark:text-gray-400 dark:bg-gray-900;
     text-rendering: optimizeLegibility;
   }
 
   #app {
-    @apply max-w-7xl p-8 mx-auto my-0 font-normal;
-    @apply xl:grid xl:grid-cols-2 xl:gap-x-8 xl:py-0 xl:px-8;
+    @apply p-4 sm:p-8 my-0 font-normal h-screen;
   }
 
   a {
@@ -36,3 +46,7 @@
     }
   }
 }
+
+// .card {
+//   @apply border-8 border-double border-black p-6;
+// }

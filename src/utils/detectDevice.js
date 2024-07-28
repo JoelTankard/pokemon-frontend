@@ -5,4 +5,4 @@ const result = parser.getResult();
 
 const isHost = () => result.device.type === undefined || result.device.type === 'desktop';
 
-export default isHost;
+export { isHost };

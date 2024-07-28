@@ -30,11 +30,18 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "deploy": "firebase deploy --only hosting",
+    "deploy": "npm run build-only && firebase deploy --only hosting"
   },
   "dependencies": {
+    "@clevercloud/uuid-to-pokemon": "^1.0.1",
+    "@supabase/supabase-js": "^2.44.4",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
+    "qrcode": "^1.5.3",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
     "ua-parser-js": "^1.0.38",
+    "uuid": "^10.0.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },

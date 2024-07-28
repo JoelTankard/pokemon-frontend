@@ -22,6 +22,16 @@ export default {
       },
       transitionDuration: {
         400: '400ms'
+      },
+      animation: {
+        blink: 'blink 0.8s linear infinite',
+      },
+
+      keyframes: {
+        blink: {
+          '0%, 24%, 75%, 100%': { opacity: 1 },
+          '25%, 74%': { opacity: 0 },
+        }
       }
     }
   },
