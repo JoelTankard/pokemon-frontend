@@ -3,7 +3,12 @@
       <Card v-if="!sessionId">
         <div class="flex flex-col items-center text-center">
           <player class="my-10" type="empty" />
-          <h2>Scan QR code to join session</h2>
+          <h2 class="mb-4">{{ isDesktop ? 'Enter code' : 'Scan QR code' }} to join session</h2>
+          <template v-if="isDesktop">
+            <Input v-model="inputSessionId" placeholder="Session Code" class="mb-6" />
+            <Button @click=joinSession">Join</Button>
+          </template>
+
       </div>
       </Card>
 
@@ -28,8 +33,7 @@
   </template>
   
   <script>
-  import { isHost } from '@/utils/detectDevice';
-  import { useSessionStore } from '@/stores/session';
+  import { isDesktop } from '@/utils/detectDevice';
   import { useSocketStore } from '@/stores/socket';
   import { usePlayerStore } from '@/stores/player';
   import Player from '@/components/Player.vue';
@@ -48,14 +52,12 @@
       Input
     },
     setup() {
-      const sessionStore = useSessionStore();
       const socketStore = useSocketStore();
       const playerStore = usePlayerStore();
   
       return {
-        isHost: isHost(),
+        isDesktop: isDesktop(),
         baseUrl: import.meta.env.VITE_DOMAIN,
-        sessionStore,
         socketStore,
         playerStore
       }
@@ -63,6 +65,7 @@
     data() {
       return {
         isReady: false,
+        inputSessionId: '',
       };
     },
     computed: {
@@ -93,6 +96,9 @@
             player_id: this.playerId,
             name: this.playerStore.playerName,
           });
+      },
+      joinSession() {
+        this.socketStore.setSessionId(this.inputSessionId);
       }
     },
     mounted() {

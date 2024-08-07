@@ -5,12 +5,12 @@
             <div class="relative h-full w-full flex flex-col justify-between">
                 <div class="absolute top-0 inset-x-0 flex items-start justify-between">
                     <BattleStats :playerId="players[0].id" :name="players[0].pokemon" :currentHp="players[0].health[0]" :maxHp="players[0].health[1]" />
-                    <Pokemon :name="players[0].pokemon" />
+                    <Pokemon :key="players[0].pokemon" :name="players[0].pokemon" />
                 </div>
 
                 <div class="absolute bottom-0  inset-x-0 flex items-end justify-between">
 
-                    <Pokemon :name="players[1].pokemon" is-back />
+                    <Pokemon :key="players[1].pokemon" :name="players[1].pokemon" is-back />
                     <BattleStats :playerId="players[1].id" :name="players[1].pokemon" :currentHp="players[1].health[0]" :maxHp="players[1].health[1]" />
 
                 </div>

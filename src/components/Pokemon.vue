@@ -1,6 +1,6 @@
 <template>
     <div :class="['pokemon', {'is-back': isBack}]">
-        <img :key="name" :src="image" alt="pokemon" />
+        <img :src="image" alt="pokemon" />
     </div>
 </template>
 

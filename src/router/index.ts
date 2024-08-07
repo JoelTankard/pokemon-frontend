@@ -1,13 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Join from '../views/Join.vue'
+import Host from '../views/Host.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'join',
+      component: Join
+    },
+    {
+      path: '/host',
+      name: 'host',
+      component: Host
     },
   ]
 })

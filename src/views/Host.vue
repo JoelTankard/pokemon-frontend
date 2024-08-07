@@ -3,26 +3,25 @@
       <div>
         <h1 class="text-lg md:text-3xl mb-12">Pokeprompts</h1>
       </div>
-      <Card>
-        <h2 class="mb-6">Host or join a game?</h2>
-        <div class="flex items-center gap-4">
-          <Button>Host game</Button>
-          <Button>Join game</Button>
-        </div>
-      </Card>
+      <host-home />
   </div>
 </template>
 
 <script>
 import { isHost } from '@/utils/detectDevice';
-import Card from '@/components/Card.vue';
-import Button from '@/components/Button.vue';
+import HostHome from '@/components/HostHome.vue';
+import PlayerHome from '@/components/PlayerHome.vue';
 
 export default {
   components: {
-    Card,
-    Button
+    HostHome,
+    PlayerHome
   },
+  setup() {
+    return {
+      isHost: isHost()
+    }
+  }
 }
 </script>
 

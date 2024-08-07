@@ -143,7 +143,7 @@
 
               console.log('players', this.socketStore.players);
 
-              const startGame = this.socketStore.players.length === 8  && this.socketStore.players.every(player => player.isReady);
+              const startGame = this.socketStore.players.length === 4  && this.socketStore.players.every(player => player.isReady);
 
               console.log('startGame', startGame);
               if (!startGame) return;
