@@ -1,10 +1,12 @@
 <template>
   <div class="home">
+    <div>
       <div>
         <h1 class="text-lg md:text-3xl mb-12">Pokeprompts</h1>
       </div>
  
       <player-home />
+    </div>
   </div>
 </template>
 
@@ -28,7 +30,7 @@ export default {
 
 <style lang="scss">
 .home {
-  @apply flex flex-col h-screen w-full;
+  @apply flex flex-col h-screen w-full xl:justify-center;
 
   .qr-code {
     @apply text-center;

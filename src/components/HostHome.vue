@@ -1,17 +1,25 @@
 <template>
     
-    <div class="flex items-center w-full h-full">
-      <div  v-if="!startGame" class="flex w-full gap-2">
-        <Card class="w-1/3">
+    <div class="flex items-center w-full">
+      <div  v-if="!startGame" class="flex flex-col xl:flex-row w-full gap-2">
+        <Card class="w-full xl:w-1/3">
             <div class="text-center">
-            <h2 class="text-xl mb-6">Join Session</h2>
+            <h2 class="text-xl mb-6">Scan QR code to join</h2>
             <div v-if="sessionUrl" class="qr-code mb-4 text-center">
                 <img :src="qrContent">
             </div>
-            <p class="text-xs">{{ sessionUrl }}</p>
+            <div class="border-2 border-black flex item-center justify-between">
+ 
+              <input ref="codeinput" class="w-full text-ellipsis p-2 rounded-none" @focus="$event.target.select()" :value="hostId" readonly/>
+              <Button @click="copyCode">{{ 
+                copyMessage ? 'Copied!' : 'Copy Code'
+               }}</Button>
+
+            </div>
+            
             </div>
         </Card>
-        <Card class="w-2/3">
+        <Card class="w-full xl:w-2/3 ">
             <h2 class="text-xl mb-12">Players</h2>
           
             <div class="players-wrapper">
@@ -21,6 +29,10 @@
   
                 </div>
             </div>
+
+            <p class="md:hidden mb-4 text-center">Host is best viewed on desktop</p>
+            <Button>Start Game</Button>
+
           </Card>
       
         </div>
@@ -41,12 +53,14 @@
   import Player from '@/components/Player.vue';
   import Card from '@/components/Card.vue';
   import GameUI from '@/components/GameUI.vue';
-  
+  import Button from '@/components/Button.vue';
+
   export default {
     components: {
       Player,
       Card,
-      GameUI
+      GameUI,
+      Button,
     },
     setup() {
       const playerStore = usePlayerStore();
@@ -66,7 +80,8 @@
         qrContent: '',
         maxPlayers: 8,
         startGame: false,
-        initalRender: false
+        initalRender: false,
+        copyMessage: false,
         
       };
     },
@@ -88,6 +103,15 @@
       async generateQRCode() {
         this.qrContent = await QRCode.toDataURL(this.sessionUrl);
       },
+      copyCode() {
+        this.copyMessage = true;
+        this.$refs.codeinput.focus();
+        document.execCommand('copy');
+
+        setTimeout(() => {
+          this.copyMessage = false;
+        }, 1000);
+      }
     },
     async created() {
       await this.generateQRCode();

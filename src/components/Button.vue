@@ -1,5 +1,5 @@
 <template>
-    <button :class="['button', {'is-disabled': disabled}]" @click="$emit('click')">
+    <button :class="['button', {'is-disabled': disabled}, `type-${type}`]" @click="$emit('click')">
             <slot></slot>
     </button>
 </template>
@@ -10,6 +10,10 @@ export default {
         disabled: {
             type: Boolean,
             default: false
+        },
+        type: {
+            type: String,
+            default: 'primary'
         }
     },
 }
@@ -21,6 +25,18 @@ export default {
 
     &.is-disabled {
         @apply bg-white border-gray-300 text-gray-300;
+    }
+    
+    &.type-primary {
+        @apply bg-black text-white border-2 border-black;
+    }
+
+    &.type-secondary {
+        @apply bg-white text-black border-2 border-black;
+    }
+
+    &.type-link {
+        @apply bg-transparent text-black border-none  underline;
     }
 }
 </style>

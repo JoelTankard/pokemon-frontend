@@ -1,31 +1,36 @@
 <template>
     <div class="flex flex-col  h-full gap-2">
       <Card v-if="!sessionId">
-        <div class="flex flex-col items-center text-center">
+        <div class="flex flex-col items-center text-center p-8">
           <player class="my-10" type="empty" />
-          <h2 class="mb-4">{{ isDesktop ? 'Enter code' : 'Scan QR code' }} to join session</h2>
-          <template v-if="isDesktop">
-            <Input v-model="inputSessionId" placeholder="Session Code" class="mb-6" />
-            <Button @click=joinSession">Join</Button>
-          </template>
+          <h2 class="mb-4">{{ isDesktop ? 'Enter code' : 'Scan QR code' }} to join game</h2>
+          <div v-if="isDesktop" class="w-full max-w-screen-sm">
+            <Input v-model="inputSessionId" placeholder="Game Code" class="mb-6" />
+            <Button @click="joinSession">Join</Button>
 
-      </div>
-      </Card>
+           
+          </div>
 
-      <template v-if="sessionId">
-      <Card  >
-        <div class="flex flex-col items-center text-center">
-          <player class="my-10" type="default" :index="playerStore.playerIndex + 1" />
-          <Input :disabled="isReady" v-model="playerStore.playerName" placeholder="Your Name" class="mb-6" @input="sendNameChange" />
-
+          <div class="w-full max-w-screen-sm mt-6">
+            <Button @click="hostGame" type="link" class="mt-5">Host a game</Button>
+          </div>
         </div>
       </Card>
 
-      <Card  >
-        <p class="mb-6">Write a prompt for your trainer.</p>
-        <Input :disabled="isReady" type="textarea" v-model="playerStore.playerPrompt" placeholder="Your Name" class="mb-6" />
+      <template v-if="sessionId">
+        <Card>
+          <div class="flex flex-col items-center text-center">
+            <player class="my-10" type="default" :index="playerStore.playerIndex + 1" />
+            <Input :disabled="isReady" v-model="playerStore.playerName" placeholder="Your Name" class="mb-6" @input="sendNameChange" />
 
-      </Card>
+          </div>
+        </Card>
+
+        <Card>
+          <p class="mb-6">Write a prompt for your trainer.</p>
+          <Input :disabled="isReady" type="textarea" v-model="playerStore.playerPrompt" placeholder="Your Name" class="mb-6" />
+
+        </Card>
 
         <Button v-if="!isReady" :disabled="!playerStore.playerName || !playerStore.playerPrompt" @click="onSubmit">Ready</Button>
       </template>
@@ -41,6 +46,8 @@
   import Button from '@/components/Button.vue';
   import Input from './Input.vue';
   import SystemSprites from './SystemSprites.vue';
+import { useRouter } from 'vue-router';
+
 
   export default {
     name: 'PlayeHome',
@@ -54,12 +61,14 @@
     setup() {
       const socketStore = useSocketStore();
       const playerStore = usePlayerStore();
+      const router = useRouter();
   
       return {
         isDesktop: isDesktop(),
         baseUrl: import.meta.env.VITE_DOMAIN,
         socketStore,
-        playerStore
+        playerStore,
+        router
       }
     },
     data() {
@@ -99,6 +108,9 @@
       },
       joinSession() {
         this.socketStore.setSessionId(this.inputSessionId);
+      },
+      hostGame() {
+        this.router.push({ name: 'host' });
       }
     },
     mounted() {

@@ -23,7 +23,7 @@
   "type": "module",
   "author": "richardevcom <hello@richardev.com> (https://github.com/richardevcom)",
   "scripts": {
-    "dev": "vite --config vite.config.dev.mts",
+    "dev": "vite --config vite.config.dev.mts --host ",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview --config vite.config.prod.mts",
     "build-only": "vite build --config vite.config.prod.mts",

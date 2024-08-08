@@ -27,7 +27,7 @@ export default {
 
 <style lang="scss">
 .home {
-  @apply flex flex-col h-screen w-full;
+  @apply flex flex-col h-screen w-full  xl:justify-center;
 
   .qr-code {
     @apply text-center;
